@@ -8,6 +8,13 @@ class User < Player
     @wins = 0
   end
 
+  def pick_hand
+    display_hand_selection_prompt
+    set_hand_from_input
+  end
+
+  private
+
   def hand=(user_selection)
     unless ['r', 'p', 's', 'l', 'sp'].include? user_selection
       fail ArgumentError, "You must select 'r', 'p', 's', 'l', or 'sp'"
@@ -22,13 +29,6 @@ class User < Player
     @hand = 'lizard' if user_selection == 'l'
     @hand = 'spock' if user_selection == 'sp'
   end
-
-  def pick_hand
-    display_hand_selection_prompt
-    set_hand_from_input
-  end
-
-  private
 
   def display_hand_selection_prompt
     system 'clear'
