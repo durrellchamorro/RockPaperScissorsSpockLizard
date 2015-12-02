@@ -1,6 +1,10 @@
 class Player
   include Comparable
 
+  def initialize
+    @wins = 0
+  end
+
   def <=>(other)
     if hand == other.hand
       0

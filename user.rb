@@ -4,13 +4,13 @@ class User < Player
   attr_reader :hand
   attr_accessor :wins
 
-  def initialize
-    @wins = 0
-  end
-
   def pick_hand
     display_hand_selection_prompt
-    set_hand_from_input
+    self.hand = gets.strip.downcase
+  rescue => error_message
+    puts error_message
+    sleep 2
+    retry
   end
 
   private
@@ -33,19 +33,5 @@ class User < Player
   def display_hand_selection_prompt
     system 'clear'
     puts "Select: 'r' Rock, 'p', Paper, 's' Scissors, 'l' Lizard, 'sp' Spock"
-  end
-
-  def set_hand_from_input
-    self.hand = gets.strip.downcase
-  rescue => @error_message
-    puts @error_message
-    handle_errors
-    pick_hand if @error_message
-  end
-
-  def handle_errors
-    return unless @error_message
-    sleep 2
-    system 'clear'
   end
 end

@@ -1,29 +1,8 @@
+require 'yaml'
 require './computer'
 require './user'
 
-OUTCOMES =
-  {
-    scissorspaper: 'Scissors cut paper.',
-    paperscissors: 'Scissors cut paper.',
-    paperrock: 'Paper covers rock.',
-    rockpaper: 'Paper covers rock.',
-    lizardrock: 'Rock crushes lizard.',
-    rocklizard: 'Rock crushes lizard.',
-    lizardspock: 'Lizard poisons Spock.',
-    spocklizard: 'Lizard poisons Spock.',
-    spockscissors: 'Spock smashes scissors.',
-    scissorsspock: 'Spock smashes scissors.',
-    scissorslizard: 'Scissors decapitate lizard.',
-    lizardscissors: 'Scissors decapitate lizard.',
-    lizardpaper: 'Lizard eats paper.',
-    paperlizard: 'Lizard eats paper.',
-    paperspock: 'Paper disproves Spock.',
-    spockpaper: 'Paper disproves Spock.',
-    spockrock: 'Spock vaporizes rock.',
-    rockspock: 'Spock vaporizes rock.',
-    rockscissors: 'Rock crushes scissors.',
-    scissorsrock: 'Rock crushes scissors.'
-  }
+OUTCOMES = YAML.load(File.open('outcomes.yml'))
 
 class RockPaperScissorsSpockLizard
   attr_accessor :user, :computer
@@ -54,8 +33,7 @@ class RockPaperScissorsSpockLizard
     if user.hand == computer.hand
       puts "Tie!"
     else
-      outcomes_key = user.hand + computer.hand
-      puts OUTCOMES[outcomes_key.to_sym] + winner
+      puts OUTCOMES[user.hand + computer.hand] + winner
     end
   end
 
